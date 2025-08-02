@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Backend\Admincontroller;
+use App\Http\Controllers\Backend\Vendorcontroller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,3 +21,13 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+//rota admin
+Route::get('admin/dashboard',[Admincontroller::class, 'dashboard'])->middleware(['auth', 'admin'])->name('admin.dashboard');
+
+//rota vendor
+Route::get('vendor/dashboard',[Vendorcontroller::class, 'dashboard'])->middleware(['auth', 'vendor'])->name('vendor.dashboard');
+
+
